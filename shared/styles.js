@@ -67,4 +67,7 @@ export const gs = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.login,
   },
+  le: {
+    margin: 15,
+  },
 });
