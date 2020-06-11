@@ -7,12 +7,13 @@ import {
   SafeAreaView,
   Button,
   Modal,
+  TouchableOpacity,
 } from 'react-native';
 import {colors, gs} from '../shared/styles';
-import {Card, CardItem, Body} from 'native-base';
+import {Card, CardItem, Body, Icon} from 'native-base';
 import {Block} from 'galio-framework';
 import ReviewAddThe from './ReviewAddThe';
-const DanhSachitem = () => {
+const DanhSachitem = ({navigation}) => {
   const [data, setdata] = useState([
     {id: '1', name: 'Can lam'},
     {id: '2', name: 'Dang lma'},
@@ -62,13 +63,40 @@ const DanhSachitem = () => {
                 data={data1}
                 keyExtractor={(item = item.aa)}
                 renderItem={({item}) => (
-                  <Card>
-                    <CardItem>
-                      <Body>
-                        <Text>{item.name}</Text>
-                      </Body>
-                    </CardItem>
-                  </Card>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('ReviewAddThe')}>
+                    <Card>
+                      <CardItem>
+                        <Body>
+                          <Text>{item.name}</Text>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              justifyContent: 'space-evenly',
+                            }}>
+                            <Icon
+                              type="AntDesign"
+                              name="eyeo"
+                              style={styles.icon}
+                            />
+                            <Icon
+                              type="AntDesign"
+                              name="menufold"
+                              style={styles.icon}
+                            />
+                            <Icon
+                              type="Octicons"
+                              name="comment"
+                              style={styles.icon}
+                            />
+                          </View>
+                          <TouchableOpacity style={styles.touchable}>
+                            <Text>NS</Text>
+                          </TouchableOpacity>
+                        </Body>
+                      </CardItem>
+                    </Card>
+                  </TouchableOpacity>
                 )}
                 ListFooterComponent={footerThe}
               />
@@ -85,7 +113,7 @@ const DanhSachitem = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue',
+    backgroundColor: '#3d3ac0',
   },
   sss: {
     backgroundColor: 'white',
@@ -114,6 +142,21 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     marginHorizontal: 4,
     marginVertical: 6,
+  },
+  icon: {
+    margin: 6,
+    fontSize: 16,
+  },
+  touchable: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 8,
+    marginHorizontal: 16,
+    marginLeft: 150,
   },
 });
 export default DanhSachitem;

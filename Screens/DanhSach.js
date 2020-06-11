@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import DanhSachItem from '../Components/DanhSachitem';
-const DanhSach = () => {
+const DanhSach = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <DanhSachItem />
+      <DanhSachItem navigation={navigation} />
     </View>
   );
 };

@@ -5,6 +5,7 @@ import Bang from '../Screens/Bang';
 import DanhSach from '../Screens/DanhSach';
 import AddBang from '../Components/AddBang';
 import AddThe from '../Components/AddThe';
+import ReviewAddThe from '../Components/ReviewAddThe';
 const Stack = createStackNavigator();
 const AddStack = () => {
   return (
@@ -27,6 +28,11 @@ const AddStack = () => {
       <Stack.Screen
         name="DanhSach"
         component={DanhSach}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ReviewAddThe"
+        component={ReviewAddThe}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
