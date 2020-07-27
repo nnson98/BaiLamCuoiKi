@@ -1,23 +1,52 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Alert} from 'react-native';
 import {colors, gs} from '../shared/styles';
 import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
+import firebase from 'react-native-firebase';
 export default function Login({navigation}) {
-  const [data, setdata] = useState({check_textInputChange: false});
+  const [data, setdata] = useState({check_textInputChange: false, phone: ''});
   const [value, onChangeText] = useState('');
   const [check, setcheck] = useState({secureTextEntry: true});
+  const [username1, setUserName] = useState('');
+  const [password1, setPassWord] = useState('');
   const textInputChange = value => {
     if (value.length !== 0) {
       setdata({check_textInputChange: true});
+      setUserName(value);
     } else {
       setdata({check_textInputChange: false});
     }
   };
   const secureTextEntry = () => {
     setcheck({secureTextEntry: !check.secureTextEntry});
+  };
+  const login = async () => {
+    firebase
+      .database()
+      .ref('/User/' + username1)
+      .once(
+        'value',
+        snapshot => {
+          const userObj = snapshot.val();
+          if (userObj !== null) {
+            // await AsyncStorage.setItem('isLoggedIn', '1');
+            if (userObj.MatKhau === value) {
+              navigation.navigate('DrawerRoutes', {
+                screen: 'Bang',
+                params: {name: username1},
+              });
+            } else {
+              Alert.alert('Mật khẩu không đúng');
+            }
+          } else {
+            Alert.alert('Tài khoản không tồn tại');
+          }
+        },
+        1000,
+      );
   };
   return (
     <View style={gs.loginContainer}>
@@ -89,7 +118,7 @@ export default function Login({navigation}) {
         </View>
         <Text style={{color: '#009bd1', marginTop: 15}}>Forgot password</Text>
         <View style={styles.button}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity onPress={login}>
             <LinearGradient
               colors={['#5db8fe', '#39cff1']}
               style={styles.signin}>

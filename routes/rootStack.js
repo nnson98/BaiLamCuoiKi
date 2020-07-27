@@ -13,8 +13,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Bang from '../Screens/Bang';
-import The from '../Screens/The';
-import CaiDat from '../Screens/CaiDat';
 import TroGiup from '../Screens/TroGiup';
 import TrangChu from '../Screens/TrangChu';
 import Splash from '../Screens/Splash';
@@ -22,6 +20,10 @@ import Login from '../Screens/Login';
 import SignUp from '../Screens/SignUp';
 import {Block} from 'galio-framework';
 import AddStack from './addStack';
+import DanhSach from '../Screens/DanhSach';
+import AddBang from '../Components/AddBang';
+import AddThe from '../Components/AddThe';
+import ReviewAddThe from '../Components/ReviewAddThe';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 function DrawerRoutes() {
@@ -30,10 +32,7 @@ function DrawerRoutes() {
       initialRouteName="Bang"
       drawerContent={props => CustomDrawerContent(props)}
       options>
-      <Drawer.Screen name="Bang" component={AddStack} />
-      <Drawer.Screen name="TrangChu" component={TrangChu} />
-      <Drawer.Screen name="The" component={The} />
-      <Drawer.Screen name="CaiDat" component={CaiDat} />
+      <Drawer.Screen name="Bang" component={Bang} />
       <Drawer.Screen name="TroGiup" component={TroGiup} />
     </Drawer.Navigator>
   );
@@ -58,8 +57,33 @@ function AppNavigator() {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Home"
+          name="DrawerRoutes"
           component={DrawerRoutes}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddBang"
+          component={AddBang}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddThe"
+          component={AddThe}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DanhSach"
+          component={DanhSach}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ReviewAddThe"
+          component={ReviewAddThe}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={TrangChu}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
@@ -89,31 +113,7 @@ function CustomDrawerContent(props) {
           <Text style={styles.txtitem}>Bảng</Text>
         </TouchableOpacity>
       </ScrollView>
-      <ScrollView style={styles.viewscrool}>
-        <TouchableOpacity
-          style={styles.viewtou}
-          onPress={() => props.navigation.navigate('TrangChu')}>
-          <Icon type="Entypo" name="home" style={styles.icon} />
-          <Text style={styles.txtitem}>Trang chủ</Text>
-        </TouchableOpacity>
-      </ScrollView>
       <Block style={styles.block} />
-      <ScrollView style={styles.viewscrool}>
-        <TouchableOpacity
-          style={styles.viewtou}
-          onPress={() => props.navigation.navigate('The')}>
-          <Icon type="Entypo" name="v-card" style={styles.icon} />
-          <Text style={styles.txtitem}>Thẻ của tôi</Text>
-        </TouchableOpacity>
-      </ScrollView>
-      <ScrollView style={styles.viewscrool}>
-        <TouchableOpacity
-          style={styles.viewtou}
-          onPress={() => props.navigation.navigate('CaiDat')}>
-          <Icon type="AntDesign" name="setting" style={styles.icon} />
-          <Text style={styles.txtitem}>Cài đặt</Text>
-        </TouchableOpacity>
-      </ScrollView>
       <ScrollView style={styles.viewscrool}>
         <TouchableOpacity
           style={styles.viewtou}
